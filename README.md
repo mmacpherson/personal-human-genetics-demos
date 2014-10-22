@@ -40,10 +40,13 @@ Prints an ASCII-art representation of genetic sharing along chromosome
 
 *Example run, with genotype file named ``datafile``*
 
-``> python european_ancestry_inference.py datafile``
+``> python european_ancestry_inference.py datafile EUROSNP.genomeorder.frequencies.txt``
 
 Evaluates the likelihoods of all six possible pairs of parents, where
 the source populations are North West Europe, South East Europe, and
 Ashkenazi Jewish. Meaning, it classifies the supplied genome according
 to its ancestry, assuming that those are the only possible
 populations.
+
+Relies on the EUROSNP marker frequencies dataset from
+[*Price et al* (2008)](http://genepath.med.harvard.edu/~reich/EUROSNP.htm).

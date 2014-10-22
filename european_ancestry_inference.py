@@ -17,7 +17,8 @@ def parse_aims(infile):
     return aims
 
 def prob_allele(allele, source, aim):
-    assert allele in (aim.ref, aim.var), (allele, (aim.ref, aim.var))
+    if allele not in (aim.ref, aim.var):
+        print >> sys.stderr, "[Warning] Found allele [%s] in marker [%s], and expected one of [%s, %s]." % (allele, aim.rsid, aim.ref, aim.var)
     if allele == aim.ref:
         return getattr(aim, "%s_ref_freq" % source)
     return 1.0 - getattr(aim, "%s_ref_freq" % source)
@@ -45,8 +46,10 @@ def main(args):
                    0.5 * prob_allele(a1, pb, aim) * prob_allele(a2, pa, aim)
             lnls[i] += math.log(like)
 
-    for p, lnl in zip(parentages, lnls):
-        print p, lnl
+    likes = [math.exp(lnl) for lnl in lnls]
+    likes_normed = [like / sum(likes) for like in likes]
+    for p, lnl, lkn in zip(parentages, lnls, likes_normed):
+        print p, "%9.3f" % lnl, "%7.2f%%" % (100 * lkn)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
