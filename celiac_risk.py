@@ -5,12 +5,15 @@ from collections import namedtuple
 RiskModel = namedtuple("RiskModel", "rsid effects")
 risk_models = (
     # -- values pulled from 23andMe's technical report
-    RiskModel("rs2187668", dict(CC=0.48, CT=3.35)),
-    RiskModel("rs6822844", dict(GT=0.79, GG=1.14)),
-    RiskModel("rs6441961", dict(TT=1.43, CC=0.82, CT=1.09)),
-    RiskModel("rs9851967", dict(CT=0.99, TT=0.81, CC=1.21)),
+    # -- each model holds an:
+    #     rsid   : id for marker associated w Celiac
+    #     effects: effect size associated with genotype at that marker
+    RiskModel("rs2187668", dict(CC=0.48, CT=3.35, TT=23.38)), # TT is interpolated
+    RiskModel("rs6441961", dict(CC=0.82, CT=1.09, TT=1.43)),
+    RiskModel("rs6822844", dict(TT=0.55, GT=0.79, GG=1.14)), # TT is interpolated
+    RiskModel("rs9851967", dict(TT=0.81, CT=0.99, CC=1.21)),
 )
-celiac_baseline_risk = 0.0012
+celiac_baseline_risk = 0.0012 # from 23andMe report
 
 def odds(p):
     return p / (1.0 - p)

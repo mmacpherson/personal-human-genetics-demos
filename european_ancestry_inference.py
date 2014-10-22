@@ -6,7 +6,7 @@ from collections import namedtuple
 AIM = namedtuple("AIM", "rsid ref var NW_ref_freq SE_ref_freq AJ_ref_freq")
 
 def parse_aims(infile):
-
+    "Read in EUROSNPS."
     aims = {}
     for line in open(infile):
         if line.startswith("SNP"):
@@ -17,8 +17,16 @@ def parse_aims(infile):
     return aims
 
 def prob_allele(allele, source, aim):
+    """Compute the probability of seeing allele ``allele`` at marker
+       ``aim`` assuming source population ``source``.
+
+       Equivalently: what is the frequency estimate of the allele
+      ``allele`` in marker ``aim`` in source population ``source``?
+    """
+
     if allele not in (aim.ref, aim.var):
         print >> sys.stderr, "[Warning] Found allele [%s] in marker [%s], and expected one of [%s, %s]." % (allele, aim.rsid, aim.ref, aim.var)
+
     if allele == aim.ref:
         return getattr(aim, "%s_ref_freq" % source)
     return 1.0 - getattr(aim, "%s_ref_freq" % source)
@@ -32,6 +40,11 @@ def main(args):
 
     aims_markers = genome.select(rsid=lambda m: m in aims.keys())
 
+    # -- six possible parental configurations given three potential
+    #    sources:
+    #      'NW' - Northwest European
+    #      'SE' - Southeast European
+    #      'AJ' - Ashkenazi Jewish
     parentages = (('NW', 'NW'),
                   ('NW', 'SE'), ('SE', 'SE'),
                   ('NW', 'AJ'), ('SE', 'AJ'), ('AJ', 'AJ'),

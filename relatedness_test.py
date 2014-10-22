@@ -4,7 +4,8 @@ import math
 import lib23
 from collections import namedtuple
 
-NC = 200
+NC = 80 # -- parameter controlling number of characters to use for
+         #    graphical display of relatedness
 
 UNRELATED = 0
 HALF_IBD  = 1
@@ -16,6 +17,9 @@ pchar = {UNRELATED:'.',
 }
 
 def is_half_ibd(ss1, ss2, thresh):
+    """Are two unphased diploid genomic regions, ss1 and ss2, compatible
+       with sharing at least one haplotype?
+    """
     num_opposite_homozygotes = 0
     is_homo = lambda gt: gt[0] == gt[1]
     for snp1, snp2 in zip(ss1, ss2):
@@ -28,6 +32,9 @@ def is_half_ibd(ss1, ss2, thresh):
     return num_opposite_homozygotes <= thresh * len(ss1)
 
 def is_full_ibd(ss1, ss2, thresh):
+    """Do two unphased diploid genomic regions, ss1 and ss2, share both
+       haplotypes?
+    """
     num_not_identical = 0
     for snp1, snp2 in zip(ss1, ss2):
         s1g = snp1.genotype
