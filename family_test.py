@@ -65,11 +65,13 @@ def main(args):
                      key=lambda m: m.position)
     assert len(subset1) == len(subset2), "Subsets not of same length!"
 
+    # -- figure out how many SNPs are in a window, then get boundaries
     window_size = len(subset1) / NC
     thresh = 1.0 / window_size
-
     window_boundaries = [(window_size * i, window_size * (i + 1)) for i in range(NC)]
     windows = [UNRELATED] * NC
+
+    # -- check each (nonoverlapping) window for relatedness
     for (win_n, window) in enumerate(window_boundaries):
         ss1 = subset1[window[0]:window[1]]
         ss2 = subset2[window[0]:window[1]]
@@ -77,6 +79,27 @@ def main(args):
         if windows[win_n] == HALF_IBD:
             windows[win_n] = FULL_IBD if is_full_ibd(ss1, ss2, thresh) else HALF_IBD
 
+    num_unrelated = sum(c == UNRELATED for c in windows)
+    num_half_ibd = sum(c == HALF_IBD for c in windows)
+    num_full_ibd = sum(c == FULL_IBD for c in windows)
+
+    print "Relatedness Summary on Chromosome 1"
+    print "==================================="
+    print
+    print "Unrelated: %3d of %3d windows (%6.2f%%)" % (num_unrelated, NC,
+                                                     100.0 * num_unrelated / NC)
+    print "Half-IBD : %3d of %3d windows (%6.2f%%)" % (num_half_ibd, NC,
+                                                     100.0 * num_half_ibd / NC)
+    print "Full-IBD : %3d of %3d windows (%6.2f%%)" % (num_full_ibd, NC,
+                                                     100.0 * num_full_ibd / NC)
+    print
+    print "Graphical Summary Along Chromosome 1"
+    print "------------------------------------"
+    print
+    print "  (Legend: Unrelated: %s  Half-IBD: %s  Full-IBD: %s)" % (pchar[UNRELATED],
+                                                                     pchar[HALF_IBD],
+                                                                     pchar[FULL_IBD])
+    print
     print "".join(pchar[c] for c in windows)
 
 
