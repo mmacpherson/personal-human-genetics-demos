@@ -28,7 +28,7 @@ estimate of risk for Celiac disease.
 
 *Example run, with two genotype files named ``datafile1`` and ``datafile2``*
 
-``> python family_test.py datafile1 datafile2``
+``> python relatedness_test.py datafile1 datafile2``
 
 Prints an ASCII-art representation of genetic sharing along chromosome
 1. Unrelated people will show no sharing; related people will show
