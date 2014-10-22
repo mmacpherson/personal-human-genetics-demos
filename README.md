@@ -17,7 +17,7 @@ basics of analyses that can be performed on genotype data.
 
 *Example run, with genotype file named ``datafile``*
 
-``> python celiac_risk.py datafile``
+``> python estimate_celiac_risk.py datafile``
 
 Looks up four markers reported to be associated with Celiac disease,
 shows the odds ratio associated with each marker, and gives a combined
@@ -28,7 +28,7 @@ estimate of risk for Celiac disease.
 
 *Example run, with two genotype files named ``datafile1`` and ``datafile2``*
 
-``> python relatedness_test.py datafile1 datafile2``
+``> python assess_relatedness.py datafile1 datafile2``
 
 Prints an ASCII-art representation of genetic sharing along chromosome
 1. Unrelated people will show no sharing; related people will show
@@ -40,7 +40,7 @@ Prints an ASCII-art representation of genetic sharing along chromosome
 
 *Example run, with genotype file named ``datafile``*
 
-``> python european_ancestry_inference.py datafile EUROSNP.genomeorder.frequencies.txt``
+``> python infer_european_origin.py datafile EUROSNP.genomeorder.frequencies.txt``
 
 Evaluates the likelihoods of all six possible pairs of parents, where
 the source populations are North West Europe, South East Europe, and
