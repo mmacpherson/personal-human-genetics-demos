@@ -8,7 +8,7 @@ To run the modules, you need some sample genotype data. Currently only
 gzipped.
 
 Sample public 23andMe-format genotypes may be obtained at
-[https://opensnp.org/](OpenSNP).
+[https://opensnp.org/](OpenSNP). Run ``make`` to download three relevant example genotype files from OpenSNP (~70Mb). Depends on ``curl``.
 
 Currently there are three programs available, that demonstrate the
 basics of analyses that can be performed on genotype data.
