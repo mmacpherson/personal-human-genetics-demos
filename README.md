@@ -48,5 +48,5 @@ Ashkenazi Jewish. Meaning, it classifies the supplied genome according
 to its ancestry, assuming that those are the only possible
 populations.
 
-Relies on the EUROSNP marker frequencies dataset from
+Relies on the EUROSNP allele frequencies dataset from
 [*Price et al* (2008)](http://genepath.med.harvard.edu/~reich/EUROSNP.htm).
