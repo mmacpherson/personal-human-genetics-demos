@@ -1,14 +1,18 @@
-stupid-human-genetics-tricks
-============================
+personal-human-genetics-demos
+=============================
 
-Learning about health, family, and ancestry from genotyping chip data.
+Learn about health, family, and ancestry from human microarray
+genotyping chip data.
 
 To run the modules, you need some sample genotype data. Currently only
-23andMe-format data is supported. The file may be uncompressed or
-gzipped.
+23andMe format data is supported. The file may be uncompressed or
+gzipped. It would be pretty easy to add support for Ancestry.com or
+Family Tree DNA downloads.
 
 Sample public 23andMe-format genotypes may be obtained at
-[https://opensnp.org/](OpenSNP). Run ``make`` to download three relevant example genotype files from OpenSNP (~70Mb). Depends on ``curl``.
+[https://opensnp.org/](OpenSNP). Run ``make`` to download three
+relevant example genotype files from OpenSNP (~70Mb). Depends on
+``curl``.
 
 Currently there are three programs available, that demonstrate the
 basics of analyses that can be performed on genotype data.
@@ -21,7 +25,9 @@ basics of analyses that can be performed on genotype data.
 
 Looks up four markers reported to be associated with Celiac disease,
 shows the odds ratio associated with each marker, and gives a combined
-estimate of risk for Celiac disease.
+estimate of risk for Celiac disease. Uses values (adjusted odds
+ratios, prevalence) obtained from 23andMe's Celiac report in October
+2014.
 
 
 ## 2. Relatedness Test
