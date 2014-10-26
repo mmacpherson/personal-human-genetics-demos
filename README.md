@@ -10,7 +10,7 @@ gzipped. It would be pretty easy to add support for Ancestry.com or
 Family Tree DNA downloads.
 
 Sample public 23andMe-format genotypes may be obtained at
-[https://opensnp.org/](OpenSNP). Run ``make`` to download three
+[OpenSNP](https://opensnp.org/). Run ``make`` to download three
 relevant example genotype files from OpenSNP (~70Mb). Depends on
 ``curl``.
 
